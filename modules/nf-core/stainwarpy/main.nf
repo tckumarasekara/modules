@@ -17,13 +17,11 @@
 
 process STAINWARPY {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
 
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
+    // ***conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/pip_stainwarpy:d1031128d4eb1fb0"
 
     input:// TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
     //               MUST be provided as an input via a Groovy Map called "meta".
@@ -31,20 +29,29 @@ process STAINWARPY {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(bam)
+    tuple val(meta), path(hne_image)
+    tuple val(meta2), path(multiplx_image)
+    tuple val(meta3), path(hne_seg_mask)
+    //val chnl_idx
+    //val fixed_px_sz
+    //val moving_px_sz
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), path("*.bam"), emit: bam
+    tuple val(meta), path("0_final_channel_image.ome.tif")    , emit: reg_image
+    tuple val(meta), path("registration_metrics.json")        , emit: reg_metrics
+    tuple val(meta), path("transformed_segmentation_mask.npy"), emit: tformed_seg_mask
     // TODO nf-core: List additional required output channels/values here
-    path "versions.yml"           , emit: versions
+    path "versions.yml"                                       , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    //def prefix = task.ext.prefix ?: "${meta.id}"
+    def VERSION = '0.1.8'
+    // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
     //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
@@ -63,13 +70,15 @@ process STAINWARPY {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        stainwarpy: \$(stainwarpy --version)
+        stainwarpy: $VERSION
     END_VERSIONS
     """
 
     stub:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    //def prefix = task.ext.prefix ?: "${meta.id}"
+    def VERSION = '0.1.8'
+    // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
     //               Have a look at the following examples:
     //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
@@ -84,7 +93,7 @@ process STAINWARPY {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        stainwarpy: \$(stainwarpy --version)
+        stainwarpy: $VERSION
     END_VERSIONS
     """
 }
