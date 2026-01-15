@@ -5,9 +5,9 @@ process STAINWARPY {
     container "community.wave.seqera.io/library/pip_stainwarpy:82fa38661931e2c1"
 
     input:
-    tuple val(meta), path(hne_img)
-    tuple val(meta2), path(multiplx_img)
-    tuple val(meta3), path(seg_mask)
+    tuple val(meta), path(hne_img), path(multiplx_img), path(seg_mask)
+    val fixed_img
+    val final_sz
 
     output:
     tuple val(meta), path("0_final_channel_image.ome.tif")        , emit: reg_image
@@ -38,6 +38,8 @@ process STAINWARPY {
         ${multiplx_ch_image} \\
         ${hne_img} \\
         . \\
+        ${fixed_img} \\
+        ${final_sz} \\
         ${args_cmd2}
 
     stainwarpy \\
@@ -47,6 +49,8 @@ process STAINWARPY {
         ${hne_img} \\
         . \\
         ${tform_map} \\
+        ${fixed_img} \\
+        ${final_sz} \\
         ${args_cmd3}
 
     mv registration_metrics_tfrom_map.json registration_metrics_tform_map.json
