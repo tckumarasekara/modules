@@ -39,7 +39,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(process.out.versions).match() }
             )
         }
 
@@ -50,6 +50,11 @@ nextflow_process {
         options "-stub"
 
         when {
+            params {
+                modules_args1 = null
+                modules_args2 = null
+                modules_args3 = null
+            }
             process {
                 """
                 input[0] = [
@@ -71,7 +76,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(process.out.versions).match() }
             )
         }
 

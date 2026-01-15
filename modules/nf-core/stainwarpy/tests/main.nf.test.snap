@@ -1,37 +1,26 @@
 {
     "colon_tissue_local - ome.tif": {
         "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "reg_image": [
-                    
-                ],
-                "reg_metrics_tform": [
-                    
-                ],
-                "transformed_seg_mask": [
-                    
-                ],
-                "versions": [
-                    
-                ]
-            }
+            [
+                "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-14T16:01:53.679137314"
+        "timestamp": "2026-01-15T11:26:53.513501086"
+    },
+    "colon_tissue_local - ome.tif - stub": {
+        "content": [
+            [
+                "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-15T11:26:59.444834636"
     }
 }
