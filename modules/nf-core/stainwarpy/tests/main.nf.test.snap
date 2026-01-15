@@ -1,6 +1,9 @@
 {
     "colon_tissue_local - ome.tif": {
         "content": [
+            true,
+            true,
+            true,
             [
                 "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
             ]
@@ -9,7 +12,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-15T12:21:37.93121898"
+        "timestamp": "2026-01-15T13:54:01.792456887"
     },
     "colon_tissue_local - ome.tif - stub": {
         "content": [
@@ -74,6 +77,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-15T12:21:43.90095514"
+        "timestamp": "2026-01-15T13:54:09.336869105"
     }
 }
