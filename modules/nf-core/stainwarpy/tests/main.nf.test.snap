@@ -1,0 +1,37 @@
+{
+    "colon_tissue_local - ome.tif": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "reg_image": [
+                    
+                ],
+                "reg_metrics_tform": [
+                    
+                ],
+                "transformed_seg_mask": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-14T16:01:53.679137314"
+    }
+}

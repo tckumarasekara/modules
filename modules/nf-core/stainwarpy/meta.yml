@@ -1,54 +1,85 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-# # TODO nf-core: Add a description of the module and list keywords
 name: "stainwarpy"
-description: write your description here
+description: Register H&E stained and Multiplexed tissue images using feature-based image registration
 keywords:
-  - sort
-  - example
-  - genomics
+  - image registration
+  - histology
+  - hne
+  - multiplexed
 tools:
-  ## TODO nf-core: Add a description and other details for the software below
   - "stainwarpy":
-      description: ""
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: null
-      identifier: null
+      description: "Register H&E stained and Multiplexed tissue images using feature-based image registration"
+      homepage: "https://github.com/tckumarasekara/stainwarpy"
+      documentation: "https://github.com/tckumarasekara/stainwarpy"
+      tool_dev_url: "https://github.com/tckumarasekara/stainwarpy"
+      licence: ["MIT License", "Apache-2.0"]
+      identifier: ""
 
 input:
-  ### TODO nf-core: Add a description of all of the variables used as input
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1' ]`
-    - bam:
+    - hne_img:
         type: file
-        description: Sorted BAM/CRAM/SAM file
-        pattern: "*.{bam,cram,sam}"
-        ontologies:
-          - edam: "http://edamontology.org/format_2572" # BAM
-          - edam: "http://edamontology.org/format_2573" # CRAM
-          - edam: "http://edamontology.org/format_3462" # SAM
+        description: H&E stained image file
+        pattern: "*.{ome.tif,ome.tiff,tif,tiff}"
+        ontologies: []
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - multiplx_img:
+        type: file
+        description: Multiplexed image file
+        pattern: "*.{ome.tif,ome.tiff,tif,tiff}"
+        ontologies: []
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - seg_mask:
+        type: file
+        description: Segmentation mask file
+        pattern: "*.{ome.tif,ome.tiff,tif,tiff,npy}"
+        ontologies: []
 
 output:
-  ### TODO nf-core: Add a description of all of the variables used as output
-  bam:
+  reg_image:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1' ]`
-      - "*.bam":
+      - "0_final_channel_image.ome.tif":
           type: file
-          description: Sorted BAM/CRAM/SAM file
-          pattern: "*.{bam,cram,sam}"
-          ontologies:
-            - edam: "http://edamontology.org/format_2572" # BAM
-            - edam: "http://edamontology.org/format_2573" # CRAM
-            - edam: "http://edamontology.org/format_3462" # SAM
+          description: Registered final channel image in OME-TIFF format
+          pattern: "0_final_channel_image.ome.tif"
+          ontologies: []
+  reg_metrics_tform:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "registration_metrics_tform_map.json":
+          type: file
+          description: Registration metrics and transformation map in JSON format
+          pattern: "registration_metrics_tform_map.json"
+          ontologies: []
+  transformed_segmentation_mask:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "transformed_segmentation_mask.ome.tif":
+          type: file
+          description: Transformed segmentation mask in OME-TIFF format
+          pattern: "transformed_segmentation_mask.ome.tif"
+          ontologies: []
   versions:
     - "versions.yml":
         type: file

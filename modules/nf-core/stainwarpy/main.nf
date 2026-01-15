@@ -1,72 +1,57 @@
-// TODO nf-core: If in doubt look at other nf-core/modules to see how we are doing things! :)
-//               https://github.com/nf-core/modules/tree/master/modules/nf-core/
-//               You can also ask for help via your pull request or on the #modules channel on the nf-core Slack workspace:
-//               https://nf-co.re/join
-// TODO nf-core: A module file SHOULD only define input and output files as command-line parameters.
-//               All other parameters MUST be provided using the "task.ext" directive, see here:
-//               https://www.nextflow.io/docs/latest/process.html#ext
-//               where "task.ext" is a string.
-//               Any parameters that need to be evaluated in the context of a particular sample
-//               e.g. single-end/paired-end data MUST also be defined and evaluated appropriately.
-// TODO nf-core: Software that can be piped together SHOULD be added to separate module files
-//               unless there is a run-time, storage advantage in implementing in this way
-//               e.g. it's ok to have a single module for bwa to output BAM instead of SAM:
-//                 bwa mem | samtools view -B -T ref.fasta
-// TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
-//               list (`[]`) instead of a file can be used to work around this issue.
-
 process STAINWARPY {
     tag "$meta.id"
     label 'process_single'
 
-    // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    // ***conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/pip_stainwarpy:d1031128d4eb1fb0"
+    container "community.wave.seqera.io/library/pip_stainwarpy:82fa38661931e2c1"
 
-    input:// TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
-    //               MUST be provided as an input via a Groovy Map called "meta".
-    //               This information may not be required in some instances e.g. indexing reference genome files:
-    //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
-    // TODO nf-core: Where applicable please provide/convert compressed files as input/output
-    //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(hne_image)
-    tuple val(meta2), path(multiplx_image)
-    tuple val(meta3), path(hne_seg_mask)
-    //val chnl_idx
-    //val fixed_px_sz
-    //val moving_px_sz
+    input:
+    tuple val(meta), path(hne_img)
+    tuple val(meta2), path(multiplx_img)
+    tuple val(meta3), path(seg_mask)
 
     output:
-    // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), path("0_final_channel_image.ome.tif")    , emit: reg_image
-    tuple val(meta), path("registration_metrics.json")        , emit: reg_metrics
-    tuple val(meta), path("transformed_segmentation_mask.npy"), emit: tformed_seg_mask
-    // TODO nf-core: List additional required output channels/values here
-    path "versions.yml"                                       , emit: versions
+    tuple val(meta), path("0_final_channel_image.ome.tif")        , emit: reg_image
+    tuple val(meta), path("registration_metrics_tform_map.json")  , emit: reg_metrics_tform
+    tuple val(meta), path("transformed_segmentation_mask.ome.tif"), emit: transformed_seg_mask
+    path "versions.yml"                                           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
-    //def prefix = task.ext.prefix ?: "${meta.id}"
-    def VERSION = '0.1.8'
-    // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
-    // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
-    //               If the software is unable to output a version number on the command-line then it can be manually specified
-    //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
-    //               Each software used MUST provide the software name and version number in the YAML version file (versions.yml)
-    // TODO nf-core: It MUST be possible to pass additional parameters to the tool as a command-line string via the "task.ext.args" directive
-    // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
-    //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
-    // TODO nf-core: Please replace the example samtools command below with your module's command
-    // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
+    def args_cmd1 = task.ext.args_cmd1 ?: ''
+    def args_cmd2 = task.ext.args_cmd2 ?: ''
+    def args_cmd3 = task.ext.args_cmd3 ?: ''
+    def multiplx_ch_image = "multiplexed_single_channel_img.ome.tif"
+    def tform_map = "feature_based_transformation_map.npy"
+    def VERSION = '0.2.0' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
+
     """
     stainwarpy \\
-        $args \\
-        -@ $task.cpus \\
-        -o ${prefix}.bam \\
-        $bam
+        extract-channel \\
+        ${multiplx_img} \\
+        . \\
+        ${args_cmd1}
+
+    stainwarpy \\
+        register \\
+        ${multiplx_ch_image} \\
+        ${hne_img} \\
+        . \\
+        ${args_cmd2}
+
+    stainwarpy \\
+        transform-seg-mask \\
+        ${seg_mask} \\
+        ${multiplx_ch_image} \\
+        ${hne_img} \\
+        . \\
+        ${tform_map} \\
+        ${args_cmd3}
+
+    mv registration_metrics_tfrom_map.json registration_metrics_tform_map.json
+    rm ${multiplx_ch_image}
+    rm ${tform_map}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -75,21 +60,12 @@ process STAINWARPY {
     """
 
     stub:
-    def args = task.ext.args ?: ''
-    //def prefix = task.ext.prefix ?: "${meta.id}"
-    def VERSION = '0.1.8'
-    // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
-    // TODO nf-core: If the module doesn't use arguments ($args), you SHOULD remove:
-    //               - The definition of args `def args = task.ext.args ?: ''` above.
-    //               - The use of the variable in the script `echo $args ` below.
-    """
-    echo $args
+    def VERSION = '0.2.0' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
 
-    touch ${prefix}.bam
+    """
+    touch 0_final_channel_image.ome.tif
+    touch registration_metrics_tform_map.json
+    touch transformed_segmentation_mask.ome.tif
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
