@@ -5,9 +5,9 @@
             true,
             true,
             {
-                "versions_stainwarpy": [
+                "versions_stainwarpy_register": [
                     [
-                        "STAINWARPY",
+                        "STAINWARPY_REGISTER",
                         "stainwarpy",
                         "0.2.0"
                     ]
@@ -18,7 +18,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-15T23:16:33.439141286"
+        "timestamp": "2026-01-16T17:19:07.500547245"
     },
     "colon_tissue_local - ome.tif - stub": {
         "content": [
@@ -43,13 +43,13 @@
                     {
                         "id": "sample1"
                     },
-                    "transformed_segmentation_mask.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "feature_based_transformation_map.npy:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
             ],
             {
-                "versions_stainwarpy": [
+                "versions_stainwarpy_register": [
                     [
-                        "STAINWARPY",
+                        "STAINWARPY_REGISTER",
                         "stainwarpy",
                         "0.2.0"
                     ]
@@ -60,6 +60,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-15T23:16:39.752899133"
+        "timestamp": "2026-01-16T17:14:02.020936677"
     }
 }

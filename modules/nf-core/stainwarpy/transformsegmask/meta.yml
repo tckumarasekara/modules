@@ -1,10 +1,11 @@
-name: "stainwarpy"
-description: Register H&E stained and Multiplexed tissue images using feature-based image registration
+name: "stainwarpy_transformsegmask"
+description: Transform segmentation mask of multiplexed or H&E stained tissue images using stainwarpy
 keywords:
   - image registration
   - histology
   - hne
   - multiplexed
+  - segmentation mask
 tools:
   - "stainwarpy":
       description: "Register H&E stained and Multiplexed tissue images using feature-based image registration"
@@ -35,6 +36,11 @@ input:
         description: Segmentation mask file
         pattern: "*.{ome.tif,ome.tiff,tif,tiff,npy}"
         ontologies: []
+    - tform_map:
+        type: file
+        description: Transformation map file
+        pattern: "*.npy"
+        ontologies: []
   - fixed_img:
       type: string
       description: Which image to use as fixed image for registration. Options - 'hne' or 'multiplexed'
@@ -45,28 +51,6 @@ input:
       ontologies: []
 
 output:
-  reg_image:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'sample1' ]`
-      - "0_final_channel_image.ome.tif":
-          type: file
-          description: Registered final channel image in OME-TIFF format
-          pattern: "0_final_channel_image.ome.tif"
-          ontologies: []
-  reg_metrics_tform:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'sample1' ]`
-      - "registration_metrics_tform_map.json":
-          type: file
-          description: Registration metrics and transformation map in JSON format
-          pattern: "registration_metrics_tform_map.json"
-          ontologies: []
   transformed_segmentation_mask:
     - - meta:
           type: map
@@ -78,7 +62,7 @@ output:
           description: Transformed segmentation mask in OME-TIFF format
           pattern: "transformed_segmentation_mask.ome.tif"
           ontologies: []
-  versions_stainwarpy:
+  versions_stainwarpy_transformsegmask:
     - - "${task.process}":
           type: string
           description: The name of the process

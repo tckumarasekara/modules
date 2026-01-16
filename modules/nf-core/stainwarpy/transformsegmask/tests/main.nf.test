@@ -1,12 +1,13 @@
 nextflow_process {
 
-    name "Test Process STAINWARPY"
+    name "Test Process STAINWARPY_TRANSFORMSEGMASK"
     script "../main.nf"
-    process "STAINWARPY"
+    process "STAINWARPY_TRANSFORMSEGMASK"
 
     tag "modules"
     tag "modules_nfcore"
     tag "stainwarpy"
+    tag "stainwarpy/transformsegmask"
 
     config "./nextflow.config"
 
@@ -14,9 +15,7 @@ nextflow_process {
 
         when {
             params {
-                modules_args1 = "--channel-idx 0"
-                modules_args2 = "--hne-px-sz 0.5023 --multiplexed-px-sz 0.209877 --feature-tform similarity"
-                modules_args3 = "--hne-px-sz 0.5023 --multiplexed-px-sz 0.209877"
+                modules_args = "--hne-px-sz 0.5023 --multiplexed-px-sz 0.209877"
             }
             process {
                 """
@@ -24,7 +23,8 @@ nextflow_process {
                     [ id:'sample1'],
                     file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
                     file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'
@@ -36,8 +36,6 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.reg_image.get(0).get(1)).exists(),
-                    file(process.out.reg_metrics_tform.get(0).get(1)).exists(),
                     file(process.out.transformed_seg_mask.get(0).get(1)).exists(),
                     process.out.findAll { key, val -> key.startsWith("versions")}
                     ).match()
@@ -53,9 +51,7 @@ nextflow_process {
 
         when {
             params {
-                modules_args1 = null
-                modules_args2 = null
-                modules_args3 = null
+                modules_args = null
             }
             process {
                 """
@@ -63,7 +59,8 @@ nextflow_process {
                     [ id:'sample1'],
                     file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
                     file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'
@@ -73,8 +70,6 @@ nextflow_process {
 
         then {
             { assert snapshot(
-                    process.out.reg_image,
-                    process.out.reg_metrics_tform,
                     process.out.transformed_seg_mask,
                     process.out.findAll { key, val -> key.startsWith("versions")}
                 ).match() }
