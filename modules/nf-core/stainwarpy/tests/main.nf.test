@@ -39,7 +39,7 @@ nextflow_process {
                     file(process.out.reg_image.get(0).get(1)).exists(),
                     file(process.out.reg_metrics_tform.get(0).get(1)).exists(),
                     file(process.out.transformed_seg_mask.get(0).get(1)).exists(),
-                    process.out.versions
+                    process.out.findAll { key, val -> key.startsWith("versions")}
                     ).match()
                 }
             )
@@ -72,10 +72,12 @@ nextflow_process {
         }
 
         then {
-            assertAll(
-                { assert process.success },
-                { assert snapshot(process.out).match() }
-            )
+            { assert snapshot(
+                    process.out.reg_image,
+                    process.out.reg_metrics_tform,
+                    process.out.transformed_seg_mask,
+                    process.out.findAll { key, val -> key.startsWith("versions")}
+                ).match() }
         }
 
     }

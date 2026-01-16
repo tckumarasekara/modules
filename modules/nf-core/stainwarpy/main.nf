@@ -10,11 +10,11 @@ process STAINWARPY {
     val final_sz
 
     output:
-    tuple val(meta), path("0_final_channel_image.ome.tif")        , emit: reg_image
-    tuple val(meta), path("registration_metrics_tform_map.json")  , emit: reg_metrics_tform
-    tuple val(meta), path("transformed_segmentation_mask.ome.tif"), emit: transformed_seg_mask
-    path "versions.yml"                                           , emit: versions
-
+    tuple val(meta), path("0_final_channel_image.ome.tif")             , emit: reg_image
+    tuple val(meta), path("registration_metrics_tform_map.json")       , emit: reg_metrics_tform
+    tuple val(meta), path("transformed_segmentation_mask.ome.tif")     , emit: transformed_seg_mask
+    // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
+    tuple val("${task.process}"), val('stainwarpy'), eval("echo 0.2.0"), emit: versions_stainwarpy, topic: versions
     when:
     task.ext.when == null || task.ext.when
 
@@ -24,7 +24,6 @@ process STAINWARPY {
     def args_cmd3 = task.ext.args_cmd3 ?: ''
     def multiplx_ch_image = "multiplexed_single_channel_img.ome.tif"
     def tform_map = "feature_based_transformation_map.npy"
-    def VERSION = '0.2.0' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
 
     """
     stainwarpy \\
@@ -56,24 +55,13 @@ process STAINWARPY {
     mv registration_metrics_tfrom_map.json registration_metrics_tform_map.json
     rm ${multiplx_ch_image}
     rm ${tform_map}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        stainwarpy: $VERSION
-    END_VERSIONS
     """
 
     stub:
-    def VERSION = '0.2.0' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
 
     """
     touch 0_final_channel_image.ome.tif
     touch registration_metrics_tform_map.json
     touch transformed_segmentation_mask.ome.tif
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        stainwarpy: $VERSION
-    END_VERSIONS
     """
 }

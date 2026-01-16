@@ -4,72 +4,13 @@
             true,
             true,
             true,
-            [
-                "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-15T13:54:01.792456887"
-    },
-    "colon_tissue_local - ome.tif - stub": {
-        "content": [
             {
-                "0": [
+                "versions_stainwarpy": [
                     [
-                        {
-                            "id": "sample1"
-                        },
-                        "0_final_channel_image.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "STAINWARPY",
+                        "stainwarpy",
+                        "0.2.0"
                     ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "sample1"
-                        },
-                        "registration_metrics_tform_map.json:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "sample1"
-                        },
-                        "transformed_segmentation_mask.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "3": [
-                    "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
-                ],
-                "reg_image": [
-                    [
-                        {
-                            "id": "sample1"
-                        },
-                        "0_final_channel_image.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "reg_metrics_tform": [
-                    [
-                        {
-                            "id": "sample1"
-                        },
-                        "registration_metrics_tform_map.json:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "transformed_seg_mask": [
-                    [
-                        {
-                            "id": "sample1"
-                        },
-                        "transformed_segmentation_mask.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,c229ce83da24235ef8099173d8259ea2"
                 ]
             }
         ],
@@ -77,6 +18,48 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-15T13:54:09.336869105"
+        "timestamp": "2026-01-15T23:16:33.439141286"
+    },
+    "colon_tissue_local - ome.tif - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "sample1"
+                    },
+                    "0_final_channel_image.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "sample1"
+                    },
+                    "registration_metrics_tform_map.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "sample1"
+                    },
+                    "transformed_segmentation_mask.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            {
+                "versions_stainwarpy": [
+                    [
+                        "STAINWARPY",
+                        "stainwarpy",
+                        "0.2.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-15T23:16:39.752899133"
     }
 }
