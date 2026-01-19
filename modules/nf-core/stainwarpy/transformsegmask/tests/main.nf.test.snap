@@ -7,7 +7,7 @@
                     [
                         "STAINWARPY_TRANSFORMSEGMASK",
                         "stainwarpy",
-                        "0.2.0"
+                        "0.2.1"
                     ]
                 ]
             }
@@ -16,7 +16,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-16T17:44:52.651812231"
+        "timestamp": "2026-01-19T12:26:49.36347477"
     },
     "colon_tissue_local - ome.tif - stub": {
         "content": [
@@ -33,7 +33,7 @@
                     [
                         "STAINWARPY_TRANSFORMSEGMASK",
                         "stainwarpy",
-                        "0.2.0"
+                        "0.2.1"
                     ]
                 ]
             }
@@ -42,6 +42,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-16T17:44:59.135339789"
+        "timestamp": "2026-01-19T12:26:56.201672995"
     }
 }

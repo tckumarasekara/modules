@@ -21,7 +21,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_image_colon.ome.tif', checkIfExists: true)
                 ]
                 """
             }
@@ -52,7 +52,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_image_colon.ome.tif', checkIfExists: true)
                 ]
                 """
             }

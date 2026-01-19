@@ -15,14 +15,14 @@ nextflow_process {
 
         when {
             params {
-                modules_args = "--hne-px-sz 0.5023 --multiplexed-px-sz 0.209877 --feature-tform similarity"
+                modules_args = "--feature-tform similarity"
             }
             process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'
@@ -57,8 +57,8 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'

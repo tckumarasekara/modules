@@ -15,16 +15,16 @@ nextflow_process {
 
         when {
             params {
-                modules_args = "--hne-px-sz 0.5023 --multiplexed-px-sz 0.209877"
+                modules_args = ""
             }
             process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/feature_based_transformation_map.npy', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'
@@ -57,10 +57,10 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/dapi_cropped_1_3d.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/hne_cropped_1_seg_masks.npy', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/feature_based_transformation_map.npy', checkIfExists: true)
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
                 input[1] = 'multiplexed'
                 input[2] = 'multiplexed'
