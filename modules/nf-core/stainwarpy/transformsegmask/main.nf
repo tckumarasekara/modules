@@ -5,7 +5,10 @@ process STAINWARPY_TRANSFORMSEGMASK {
     container "community.wave.seqera.io/library/pip_stainwarpy:333bade85f7f91f3"
 
     input:
-    tuple val(meta), path(hne_img), path(multiplx_img), path(seg_mask), path(tform_map)
+    tuple val(meta), path(hne_img)
+    tuple val(meta2), path(multiplx_img)
+    tuple val(meta3), path(seg_mask)
+    tuple val(meta4), path(tform_map)
     val fixed_img
     val final_sz
 

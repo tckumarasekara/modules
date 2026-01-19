@@ -21,13 +21,22 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id:'sample1'],
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'sample1'],
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'sample1'],
                     file('../../../../../Masters-Thesis/data/nf-core/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
-                input[1] = 'multiplexed'
-                input[2] = 'multiplexed'
+                input[4] = 'multiplexed'
+                input[5] = 'multiplexed'
                 """
             }
         }
@@ -57,13 +66,22 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true),
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true),
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id:'sample1'],
+                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'sample1'],
+                    file('../../../../../Masters-Thesis/data/nf-core/hne_segmentation_mask.ome.tif', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'sample1'],
                     file('../../../../../Masters-Thesis/data/nf-core/feature_based_transformation_map.npy', checkIfExists: true)
                 ]
-                input[1] = 'multiplexed'
-                input[2] = 'multiplexed'
+                input[4] = 'multiplexed'
+                input[5] = 'multiplexed'
                 """
             }
         }

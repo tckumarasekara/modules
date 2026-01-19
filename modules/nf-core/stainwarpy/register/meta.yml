@@ -25,6 +25,11 @@ input:
         description: H&E stained image file
         pattern: "*.{ome.tif,ome.tiff,tif,tiff}"
         ontologies: []
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
     - multiplx_img:
         type: file
         description: Multiplexed image file

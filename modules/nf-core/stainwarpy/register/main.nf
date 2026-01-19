@@ -5,7 +5,8 @@ process STAINWARPY_REGISTER {
     container "community.wave.seqera.io/library/pip_stainwarpy:333bade85f7f91f3"
 
     input:
-    tuple val(meta), path(hne_img), path(multiplx_img)
+    tuple val(meta), path(hne_img)
+    tuple val(meta2), path(multiplx_img)
     val fixed_img
     val final_sz
 
