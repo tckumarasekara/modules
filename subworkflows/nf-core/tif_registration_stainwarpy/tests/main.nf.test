@@ -16,6 +16,11 @@ nextflow_workflow {
     test("colon_tissue_local - ome.tif") {
 
         when {
+            params {
+                moduleA_args = '--channel-idx 0'
+                moduleB_args = '--feature-tform similarity'
+                moduleC_args = ''
+            }
             workflow {
                 """
                 input[0] = [
