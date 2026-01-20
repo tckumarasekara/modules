@@ -7,7 +7,7 @@
                     [
                         "STAINWARPY_EXTRACTCHANNEL",
                         "stainwarpy",
-                        "0.2.1"
+                        "0.2.3"
                     ]
                 ]
             }
@@ -16,7 +16,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-19T12:06:26.487297709"
+        "timestamp": "2026-01-20T13:17:39.703541244"
     },
     "colon_tissue_local - ome.tif - stub": {
         "content": [
@@ -33,7 +33,7 @@
                     [
                         "STAINWARPY_EXTRACTCHANNEL",
                         "stainwarpy",
-                        "0.2.1"
+                        "0.2.3"
                     ]
                 ]
             }
@@ -42,6 +42,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-19T12:06:33.685324855"
+        "timestamp": "2026-01-20T13:17:46.598775214"
     }
 }

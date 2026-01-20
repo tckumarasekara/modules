@@ -8,17 +8,17 @@
                 [
                     "TIF_REGISTRATION_STAINWARPY:STAINWARPY_EXTRACTCHANNEL",
                     "stainwarpy",
-                    "0.2.1"
+                    "0.2.3"
                 ],
                 [
                     "TIF_REGISTRATION_STAINWARPY:STAINWARPY_REGISTER",
                     "stainwarpy",
-                    "0.2.1"
+                    "0.2.3"
                 ],
                 [
                     "TIF_REGISTRATION_STAINWARPY:STAINWARPY_TRANSFORMSEGMASK",
                     "stainwarpy",
-                    "0.2.1"
+                    "0.2.3"
                 ]
             ]
         ],
@@ -26,6 +26,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-19T18:23:09.846774766"
+        "timestamp": "2026-01-20T13:23:04.973521494"
     }
 }

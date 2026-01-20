@@ -2,7 +2,7 @@ process STAINWARPY_REGISTER {
     tag "$meta.id"
     label 'process_single'
 
-    container "community.wave.seqera.io/library/pip_stainwarpy:333bade85f7f91f3"
+    container "community.wave.seqera.io/library/pip_stainwarpy:d2ff09a87c79896b"
 
     input:
     tuple val(meta), path(hne_img)
