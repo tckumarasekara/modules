@@ -21,11 +21,11 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'imaging/hne_multiplexed/hne_image_colon.ome.tif', checkIfExists: true)
                 ]
                 input[1] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'imaging/hne_multiplexed/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
                 ]
                 input[2] = 'multiplexed'
                 input[3] = 'multiplexed'
@@ -60,11 +60,11 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/hne_image_colon.ome.tif', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'imaging/hne_multiplexed/hne_image_colon.ome.tif', checkIfExists: true)
                 ]
                 input[1] = [
                     [ id:'sample1'],
-                    file('../../../../../Masters-Thesis/data/nf-core/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'imaging/hne_multiplexed/multiplexed_single_channel_img.ome.tif', checkIfExists: true)
                 ]
                 input[2] = 'multiplexed'
                 input[3] = 'multiplexed'
